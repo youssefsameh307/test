@@ -57,7 +57,7 @@ class RandAugment:
     operations. The magnitude is computed based on an augmentation-specific predefined range. It can either be fixed or
     randomly sampled at every call.
     """
-    def __init__(self, n: int, m: int = 5, max_scale: int = 30, randomized_magnitude: bool = False):
+    def __init__(self, n: int, m: int = 5, max_scale: int = 30, randomized_magnitude: bool = False, augmentations = []):
         """
         Initialization of a RandAugment class.
 
@@ -84,7 +84,11 @@ class RandAugment:
         self.cutout = cutout
         self.max_scale = max_scale
         self.randomized_magnitude = randomized_magnitude
-        self.augmentation_list = get_randaug_list()
+
+        if augmentations and len(augmentations) > 0:
+            self.augmentation_list = augmentations
+        else:
+            self.augmentation_list = get_randaug_list()
 
     def __call__(self, img: Image):
         """
@@ -103,7 +107,7 @@ class RandAugment:
         augmentations = random.choices(self.augmentation_list, k=self.N)
         for transform, range_min, range_max in augmentations:
             magnitude = self.get_transformation_magnitude(range_min, range_max)
-            img = transform(img, magnitude)
+            img = transform(img, magnitude) # TODO account for transforms that doesn't take magnitude
         return img
 
     def get_transformation_magnitude(self, range_min: float, range_max: float):

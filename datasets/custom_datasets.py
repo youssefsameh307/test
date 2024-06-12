@@ -73,6 +73,8 @@ class CustomSubset(Dataset):
             one can access the index in the original base dataset instead of the index in the subset, which might be
             subject to change.
         """
+
+        # TODO class changes should be added here 
         img, label = self.dataset[self.indices[idx]]
         if self.return_index:
             return self.transform(img), label, self.indices[idx]

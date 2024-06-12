@@ -7,6 +7,7 @@ from torch.utils.data import Dataset
 from datasets.config import *
 from datasets.custom_datasets import *
 
+from datasets.mnist_set import get_unlabled_mnist
 
 DATASET_GETTERS = {
     "cifar10": datasets.CIFAR10,
@@ -17,6 +18,7 @@ DATASET_GETTERS = {
     "caltech101": Caltech101,
     "caltech256": Caltech256,
     "ham10000": HAM10000,
+    "mnist":get_unlabled_mnist,
 }
 
 
@@ -29,7 +31,8 @@ def get_datasets(
         unlabeled_train_transform: Callable = None,
         test_transform: Callable = None,
         download: bool = True,
-        dataset_indices: Optional[List] = None
+        dataset_indices: Optional[List] = None,
+        present_dataSet = None,
 ):
     """
     Method that returns all dataset objects required for semi-supervised learning: labeled train set, unlabeled train

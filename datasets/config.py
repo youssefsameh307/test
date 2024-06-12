@@ -1,6 +1,7 @@
 # Dict specifying used image sizes for model training
 IMG_SIZE = {
     "cifar10": 32,
+    "mnist": 28,
     "cifar100": 32,
     "imagenet": 256,  # ImageNet images have varying resolutions. It is common to train on subsampled 256x256 images
     "stl10": 96,
@@ -12,6 +13,10 @@ IMG_SIZE = {
 
 # Mean and standard deviation values used for normalizing input images
 NORMALIZATION_VARIABLES = {
+    "mnist":{
+        "mean": (0.1307,0.1307,0.1307),
+        "std": (0.3015,0.3015,0.3015)
+    },
     "cifar10": {
         "mean": (0.4914, 0.4822, 0.4465),
         "std": (0.2470, 0.2435, 0.2616)

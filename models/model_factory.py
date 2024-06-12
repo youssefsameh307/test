@@ -3,6 +3,12 @@ from torch import nn
 
 import models.preact_resnet as preact_resnet
 from models.wideresnet import WideResNet
+from dummyModel.dummyFCN import FCN
+
+
+
+def get_dummy_model(num_classes=10, pretrained=False):
+    return FCN(num_classes)
 
 
 def get_resnet18(num_classes=10, pretrained=False):
@@ -83,6 +89,7 @@ def get_densenet201(pretrained=False, **kwargs):
 
 
 MODEL_GETTERS = {
+    "dummy": get_dummy_model,
     "resnet18": get_resnet18,
     "resnet34": get_resnet34,
     "resnet50": get_resnet50,

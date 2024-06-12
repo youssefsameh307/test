@@ -407,6 +407,7 @@ def train_epoch(
                 )
             )
             p_bar.update()
+        break # TODO please remove this 
 
     if args.pbar:
         p_bar.close()
@@ -452,6 +453,8 @@ def train_step(args: argparse.Namespace, model: torch.nn.Module, batch: Tuple, m
     logits_x = logits[:len(x_weak)]
     logits_u_weak, logits_u_strong = logits[len(x_weak):].chunk(2)
     del inputs
+
+    # TODO: loss computation for diff labels here
 
     # Compute standard cross entropy loss for labeled samples
     labeled_loss = F.cross_entropy(logits_x, labels, reduction="mean")

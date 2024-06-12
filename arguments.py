@@ -17,6 +17,7 @@ def parse_args():
         "--model",
         default="wide_resnet28_2",
         choices=[
+            "dummy",
             "vgg11",
             "vgg13",
             "vgg16",
@@ -61,6 +62,7 @@ def parse_args():
         default="cifar10",
         choices=[
             "cifar10",
+            "mnist",
             "cifar100",
             "imagenet",
             "svhn",
